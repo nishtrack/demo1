@@ -10,6 +10,11 @@ app.get('/', function(request, response) {
 response.sendfile('./index.html');
 })
 
+app.get('/login', function(request, response) {
+ console.log(fs);
+response.sendfile('./login.html');
+})
+
 app.listen(app.get('port'), function() {
   console.log("Node app is running at localhost:" + app.get('port'))
 })
