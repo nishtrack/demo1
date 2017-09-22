@@ -12,8 +12,8 @@ response.sendfile('./index.html');
 
 app.get('/login', function(request, response) {
  console.log(fs);
-//response.sendfile('./login.html');
-    response.redirect(301,'http://stackoverflow.com');
+response.sendfile('./login.html');
+  //  response.redirect(301,'http://stackoverflow.com');
 })
 
 app.get('/:name', function(request, response) {
