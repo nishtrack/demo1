@@ -7,12 +7,12 @@ app.use(express.static(__dirname + '/public'))
 
 app.get('/', function(request, response) {
  console.log(fs);
-response.sendfile('./index.html');
+response.sendfile('./login.html');
 })
 
 app.get('/login', function(request, response) {
  console.log(fs);
-response.sendfile('./login.html');
+response.sendfile('./index.html');
   //  response.redirect(301,'http://stackoverflow.com');
 })
 
