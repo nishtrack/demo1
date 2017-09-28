@@ -80,10 +80,13 @@
     </div>
 
     <script type="text/javascript">
-        window._vis_opt_queue = window._vis_opt_queue || [];
-        window._vis_opt_queue.push(function() {
-            _vis_opt_register_conversion(1, 4);
-        });
+        function fireConversion() {
+            console.log("Click");
+            window._vis_opt_queue = window._vis_opt_queue || [];
+            window._vis_opt_queue.push(function() {
+                _vis_opt_register_conversion(1, 4);
+            });
+        }
 
     </script>
     <!--
