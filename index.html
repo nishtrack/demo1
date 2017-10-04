@@ -105,17 +105,23 @@
 -->
 
 
-<div id='notifyvisitorstag'></div>
-        <script>
-        (function(n,o,t,i,f,y) {
-            n[i] = function() { (n[i].q = n[i].q || []).push(arguments) }; n[i].l = new Date;
+
+<div id="_nv_hm"></div>
+<script>
+       (function (n, o, t, i, f, y) {
+           n[i] = function () {
+               (n[i].q = n[i].q || []).push(arguments)
+           };
+           n[i].l = new Date;
+           n[t] = {};
             n[t] = {}; n[t].auth = { bid_e : 'AE012E59227234473F7C7538A0E86DF1', bid : '1294', t : '420'};
-            n[t].async = false;
-            (y = o.createElement('script')).type = 'text/javascript';
-            y.src = "//cdn.notifyvisitors.com/js/notify-visitors-1.0.js";  
-            (f = o.getElementsByTagName('script')[0]).parentNode.insertBefore(y, f);
-        })(window, document, 'notify_visitors', 'nv');
-        </script>
+       n[t].ruleData = { 'price' : '5000','amount' : '9000'};
+           n[t].async = false;
+           (y = o.createElement('script')).type = 'text/javascript';
+           y.src = "https://devheat.notifyvisitors.com/js/unminified/notify-visitors-heatmap-2.0.js";
+           (f = o.getElementsByTagName('script')[0]).parentNode.insertBefore(y, f);
+       })(window, document, '_nv_hm', 'nvheat');
+   </script>
 </body>
 
 </html>
