@@ -10,6 +10,11 @@ app.get('/', function(request, response) {
 response.sendfile('./index.html');
 })
 
+app.get('/amp', function(request, response) {
+ console.log(fs);
+response.sendfile('./apm.html');
+})
+
 app.get('/login', function(request, response) {
  console.log(fs);
 response.sendfile('./login.html');
