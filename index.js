@@ -1,8 +1,13 @@
 var express = require('express')
 var app = express()
 var fs = express("fs");
-var webPush = require('web-push');
+var webpush = require('web-push');
 var bodyParser = require('body-parser')
+
+app.use(bodyParser.json());
+
+
+webpush.setGCMAPIKey('AIzaSyBgtX_-6hCWfshS4xyUVq-pNPYEM0GXNGo');
 
 app.set('port', (process.env.PORT || 5001))
 app.use(express.static(__dirname + '/public'))
@@ -44,29 +49,44 @@ app.get('/login', function (request, response) {
 //})
 
 app.post("/sendnotification", function (req, res) {
-
-	webPush.sendNotification(req.body.endpoint, {
-			payload: JSON.stringify({
-				'title': req.body.title,
-				'icon': req.body.icon,
-				'body': req.body.body,
-				'url': req.body.link
-			}),
-			userPublicKey: req.body.key,
-			userAuth: req.body.authSecret,
-		})
-		.then(function () {
-			console.log("sent push")
-			res.send({
-				"status": "sucess"
-			});
-		}, function (err) {
-			console.log('webpusherr', err);
-			res.send({
-				"status": "error",
-				"error": err
-			});
+console.log(JSON.stringify(req.body));
+	//	webPush.sendNotification(req.body.endpoint, {
+	//			payload: JSON.stringify({
+	//				'title': req.body.title,
+	//				'icon': req.body.icon,
+	//				'body': req.body.body,
+	//				'url': req.body.link
+	//			}),
+	//			userPublicKey: req.body.key,
+	//			userAuth: req.body.authSecret,
+	//		})
+	var pushSubscription = {
+		endpoint: req.body.endpoint,
+		keys: {
+			auth: req.body.authSecret,
+			p256dh: req.body.key
+		}
+	}
+	webpush.sendNotification(pushSubscription, JSON.stringify({
+		'title': req.body.title,
+		'icon': req.body.icon,
+		'body': req.body.body,
+		'url': req.body.link
+	}))
+	.then(function () {
+		console.log("sent push")
+		res.send({
+			"status": "sucess"
 		});
+	}, function (err) {
+		console.log('webpusherr', err);
+		res.send({
+			"status": "error",
+			"error": err
+		});
+	});
+
+
 
 });
 
