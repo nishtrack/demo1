@@ -111,7 +111,7 @@ app.get("/vapidkeys",function(req,res){
 app.post("/ampsendnotification", function (req, res) {
 
 		webpush.setVapidDetails(
-  'nishant.d@notifyvisitors.com',
+  'mailto:nishant.d@notifyvisitors.com',
   'BFup8_2DGhMfLDUs85md8ei6m6Yc-efrfbfaKZsNtH4YmTLTsqoMA72cZRyS8kx7pVJjAOHICvTmuKtrUuTBldE',
  'JuudbNLmjGby75Va6UpO7GOfSK8HOZY4oGpWP-ZhEWE'
 );
