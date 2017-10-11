@@ -29,7 +29,7 @@ app.use(function (req, res, next) {
     next();
 });
 
-webpush.setGCMAPIKey('AIzaSyBgtX_-6hCWfshS4xyUVq-pNPYEM0GXNGo');
+
 
 app.set('port', (process.env.PORT || 5001))
 app.use(express.static(__dirname + '/public'))
@@ -71,17 +71,7 @@ app.get('/login', function (request, response) {
 //})
 
 app.post("/sendnotification", function (req, res) {
-console.log(JSON.stringify(req.body));
-	//	webPush.sendNotification(req.body.endpoint, {
-	//			payload: JSON.stringify({
-	//				'title': req.body.title,
-	//				'icon': req.body.icon,
-	//				'body': req.body.body,
-	//				'url': req.body.link
-	//			}),
-	//			userPublicKey: req.body.key,
-	//			userAuth: req.body.authSecret,
-	//		})
+	webpush.setGCMAPIKey('AIzaSyBgtX_-6hCWfshS4xyUVq-pNPYEM0GXNGo');
 	var pushSubscription = {
 		endpoint: req.body.endpoint,
 		keys: {
@@ -111,6 +101,45 @@ console.log(JSON.stringify(req.body));
 
 
 });
+
+app.get("/vapidkeys",function(req,res){
+	const vapidKeys = webpush.generateVAPIDKeys();
+	res.send(vapidKeys);
+});
+
+
+app.post("/ampsendnotification", function (req, res) {
+	webpush.setGCMAPIKey('JuudbNLmjGby75Va6UpO7GOfSK8HOZY4oGpWP-ZhEWE');
+	var pushSubscription = {
+		endpoint: req.body.endpoint,
+		keys: {
+			auth: req.body.authSecret,
+			p256dh: req.body.key
+		}
+	}
+	webpush.sendNotification(pushSubscription, JSON.stringify({
+		'title': req.body.title,
+		'icon': req.body.icon,
+		'body': req.body.body,
+		'url': req.body.link
+	}))
+	.then(function () {
+		console.log("sent push")
+		res.send({
+			"status": "sucess"
+		});
+	}, function (err) {
+		console.log('webpusherr', err);
+		res.send({
+			"status": "error",
+			"error": err
+		});
+	});
+
+
+
+});
+
 
 
 app.listen(app.get('port'), function () {
