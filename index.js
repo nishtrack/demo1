@@ -38,6 +38,10 @@ app.get('/', function (request, response) {
 	console.log(fs);
 	response.sendfile('./index.html');
 })
+app.get('/image', function (request, response) {
+	console.log(fs);
+	 response.sendFile(__dirname+'/test.jpg');
+})
 
 app.get('/amp', function (request, response) {
 	console.log(fs);
